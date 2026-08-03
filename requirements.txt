@@ -1,0 +1,15 @@
+pandas
+numpy
+matplotlib
+seaborn
+xgboost
+scikit-learn
+statsmodels
+scipy
+shap
+duckdb
+python-dotenv
+Office365-REST-Python-Client
+msal
+ipykernel
+jupyter
