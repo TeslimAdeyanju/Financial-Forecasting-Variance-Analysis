@@ -33,6 +33,10 @@ These findings come from the executive summary generated in [stage 6](notebook/0
 
 ## Data analytics lifecycle
 
+![Six-stage pipeline from OneDrive sourcing through bronze, silver and gold data layers to Power BI extracts and insights](docs/images/financial_transactions_pipeline_lifecycle.png)
+
+The diagram follows the data from the OneDrive source through the bronze, silver and gold layers to the reporting extracts. In stage 6, the charts and executive summary are in the notebook. The Power BI dashboard has not been built yet.
+
 | Stage | Notebook | What it does |
 | --- | --- | --- |
 | 1 | [Data Sourcing](notebook/01-data-sourcing/01-data-sourcing.ipynb) | Research question, source schema, OneDrive availability check, source limitations |

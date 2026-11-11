@@ -145,6 +145,10 @@ The project also asks whether variances are **systematic**. If the average custo
 
 ### Methodology roadmap
 
+![Six-stage pipeline from OneDrive sourcing through bronze, silver and gold data layers to Power BI extracts and insights](docs/images/financial_transactions_pipeline_lifecycle.png)
+
+The same flow, with the module that implements each step:
+
 ```text
 OneDrive  TeslimDataLakes/financial_transactions_dataset_analytics_kaggle/
    │  ① Sourcing: availability check only
