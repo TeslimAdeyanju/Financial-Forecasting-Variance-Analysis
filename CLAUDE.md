@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-A portfolio analytics project on the Kaggle "Financial Transactions Dataset" (about 13.3M card transactions plus 2k users, 6k cards, MCC codes and partial fraud labels). It is laid out as six stage notebooks following the same lifecycle as the NHS-Trust-Financial-Analytics repo. See [README.md](README.md) for the research question and the methodological corrections made to the earlier notebook, which is in `archive/` and is not maintained.
+A portfolio analytics project on the Kaggle "Financial Transactions Dataset" (about 13.3M card transactions plus 2k users, 6k cards, MCC codes and partial fraud labels). It is laid out as six stage notebooks following the same lifecycle as the NHS-Trust-Financial-Analytics repo. See [README.md](README.md) for the research question and the methodological corrections made to the earlier notebook, which was removed and is only in git history (commit `d9d7bcb`).
 
 ## Environment & commands
 

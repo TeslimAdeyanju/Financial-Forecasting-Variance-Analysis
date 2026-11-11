@@ -1,4 +1,4 @@
-> **Archived.** This README (merged in PR #1, October 2026) describes the earlier single-notebook version of the project, now kept in [`archive/`](../archive/). Most of its "Limitations and Next Steps" were addressed by the six-stage rebuild; see the current [README](../README.md).
+> **Archived.** This README (merged in PR #1, October 2026) describes the earlier single-notebook version of the project, still available in the [git history](https://github.com/TeslimAdeyanju/Financial-Forecasting-Variance-Analysis/blob/d9d7bcbc354ae1a3cd7637f1e3ecc81f0e166fb6/Financial-Data-Analytics-Forecasting-Variance-Analysis.ipynb). Most of its "Limitations and Next Steps" were addressed by the six-stage rebuild; see the current [README](../README.md).
 
 # Financial Forecasting, Variance Analysis and Customer Insights
 

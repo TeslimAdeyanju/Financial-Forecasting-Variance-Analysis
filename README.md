@@ -61,7 +61,7 @@ DuckDB queries the Parquet files directly through `silver_*` and `gold_*` views 
 
 ## Methodological corrections
 
-This repository replaces an earlier single notebook, which is kept in [`archive/`](archive/). These corrections change the results, not just how the project is laid out:
+This repository replaces an earlier single notebook, which is still available in the [git history](https://github.com/TeslimAdeyanju/Financial-Forecasting-Variance-Analysis/blob/d9d7bcbc354ae1a3cd7637f1e3ecc81f0e166fb6/Financial-Data-Analytics-Forecasting-Variance-Analysis.ipynb). These corrections change the results, not just how the project is laid out:
 
 1. **Forecast leakage.** The old rolling-average and cumulative features included the month being predicted. All features now use prior months only.
 2. **Circular variance.** The old "budget" was the same month's average, so variances summed to zero by construction. The budget now comes only from earlier months.
