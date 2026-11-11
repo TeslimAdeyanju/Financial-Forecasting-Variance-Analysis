@@ -145,19 +145,9 @@ The project also asks whether variances are **systematic**. If the average custo
 
 ### Methodology roadmap
 
-```text
-OneDrive  TeslimDataLakes/financial_transactions_dataset_analytics_kaggle/
-   │  ① Sourcing: availability check only
-   ▼  ② Ingestion: onedrive_loader.load(), one pull
-data/bronze/   text-only copy of all five sources
-   ▼  ③ Cleaning & transformation: python/cleaning.py, sql/quality/
-data/silver/   typed, conformed, validated
-   ▼  ④ Modelling & analytics: sql/gold/, python/forecasting.py, python/segmentation.py
-data/gold/     analytical models and model outputs
-   ▼  ⑤ Preparation for reporting: reconciliation, star-schema extracts
-outputs/powerbi/   CSV extracts and data dictionary
-   ▼  ⑥ Visualisation & insights: charts, generated executive summary
-```
+![Six-stage pipeline from OneDrive sourcing through bronze, silver and gold data layers to Power BI extracts and insights](docs/images/financial_transactions_pipeline_lifecycle.png)
+
+The diagram shows each stage's input, the code that runs it, and the data layer it produces. In stage 6, the charts and executive summary are in the notebook. The Power BI dashboard has not been built yet.
 
 Storage is a set of Parquet files in a **bronze → silver → gold** structure, queried with **DuckDB**. Each file is exposed as a SQL view (`silver_transactions`, `gold_monthly_spend` and so on), so the analytical logic reads like ordinary warehouse SQL. DuckDB scans the files directly, which means the 13-million-row transaction table never has to be loaded into pandas for the SQL steps. That matters on an 8 GB laptop.
 
