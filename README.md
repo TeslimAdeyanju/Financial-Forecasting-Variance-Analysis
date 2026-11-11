@@ -91,3 +91,5 @@ The publisher doesn't document how the records were produced, so the findings sh
 ## Author
 
 **Teslim Adeyanju** | [Portfolio](https://adeyanjuteslim.co.uk) | [LinkedIn](https://www.linkedin.com/in/adeyanjuteslimuthman)
+
+[Previous README (October 2026)](docs/readme-history.md) | [Original README](docs/legacy-readme.md)
