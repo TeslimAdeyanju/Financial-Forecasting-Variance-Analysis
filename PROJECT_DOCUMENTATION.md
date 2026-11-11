@@ -356,7 +356,7 @@ The **executive summary is generated with code from the gold tables**. Each sent
 
 ## Corrections to the Earlier Analysis
 
-This repository replaces an earlier single notebook (kept unchanged in [`archive/`](archive/) for transparency). An audit of that notebook found problems that **invalidated its results**, not just its layout:
+This repository replaces an earlier single notebook (still available in the [git history](https://github.com/TeslimAdeyanju/Financial-Forecasting-Variance-Analysis/blob/d9d7bcbc354ae1a3cd7637f1e3ecc81f0e166fb6/Financial-Data-Analytics-Forecasting-Variance-Analysis.ipynb) for transparency). An audit of that notebook found problems that **invalidated its results**, not just its layout:
 
 | # | Issue in the earlier notebook | Consequence | Correction |
 | --- | --- | --- | --- |
