@@ -33,10 +33,6 @@ These findings come from the executive summary generated in [stage 6](notebook/0
 
 ## Data analytics lifecycle
 
-![Six-stage pipeline from OneDrive sourcing through bronze, silver and gold data layers to Power BI extracts and insights](docs/images/financial_transactions_pipeline_lifecycle.png)
-
-The diagram follows the data from the OneDrive source through the bronze, silver and gold layers to the reporting extracts. In stage 6, the charts and executive summary are in the notebook. The Power BI dashboard has not been built yet.
-
 | Stage | Notebook | What it does |
 | --- | --- | --- |
 | 1 | [Data Sourcing](notebook/01-data-sourcing/01-data-sourcing.ipynb) | Research question, source schema, OneDrive availability check, source limitations |
@@ -48,7 +44,7 @@ The diagram follows the data from the OneDrive source through the bronze, silver
 
 ## Data architecture
 
-![Data architecture: OneDrive source read through the Microsoft Graph API into bronze, silver and gold Parquet layers, then reconciled CSV extracts for Power BI](docs/images/financial_transactions_data_architecture.png)
+![Data pipeline in five steps: OneDrive source, bronze ingestion, silver cleaning and transformation, gold modelling and analytics, and reconciled CSV extracts for Power BI, with the code that runs each step](docs/images/financial_transactions_data_architecture.png)
 
 DuckDB queries the Parquet files directly through `silver_*` and `gold_*` views ([`python/warehouse.py`](python/warehouse.py)), so the 13-million-row transaction table never has to fit in pandas for the SQL steps. `data/` and `outputs/` are gitignored and can be rebuilt from OneDrive by running stages 2–6.
 
