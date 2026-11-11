@@ -1,15 +1,16 @@
-pandas
+# Install with: uv pip install --python .venv/bin/python -r requirements.txt
+# Plus the OneDrive connector (editable, credentials live in its own .env):
+#   uv pip install --python .venv/bin/python -e /Users/teslim/TeslimWorkSpace/OneDrive-Connector
+pandas>=3.0
 numpy
-matplotlib
-seaborn
-xgboost
-scikit-learn
-statsmodels
+pyarrow
+duckdb>=1.1
 scipy
+statsmodels>=0.14
+scikit-learn
+xgboost
 shap
-duckdb
-python-dotenv
-Office365-REST-Python-Client
-msal
+matplotlib
 ipykernel
 jupyter
+nbconvert
