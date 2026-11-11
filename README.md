@@ -1,157 +1,95 @@
-# Financial Forecasting, Variance Analysis and Customer Insights
+# Financial Forecasting & Variance Analysis
 
-> A financial data analytics case study combining SQL-based feature extraction, time-series forecasting, budget-versus-actual analysis, customer segmentation and financial performance reporting.
+This project looks at whether a card portfolio's monthly spending can be forecast, which customers deviate from their expected spending, and where value and fraud are concentrated. It uses about 13 million card transactions from the Kaggle *Financial Transactions Dataset* and is built with Python, DuckDB SQL and time-series and machine-learning methods.
 
-**Status:** Research notebook with implemented analysis and modelling code. Reproduction requires access to the source data and completion of a clean end-to-end validation.  
-**Technologies:** Python, pandas, DuckDB SQL, statsmodels, XGBoost, scikit-learn, SHAP, Matplotlib, Seaborn, SharePoint/OneDrive.
+## The research question
 
-## Executive Summary
+> **How predictable is a card portfolio's monthly spending, which customers deviate from their expected spending, and where are value and fraud concentrated?**
 
-Financial teams need reliable revenue forecasts, clear explanations of spending variances and a better understanding of customer behaviour. This project brings these tasks together in a single analytical workflow. Transaction and customer datasets are integrated, queried using SQL, converted into forecasting and reporting features, and used for statistical and machine learning analysis.
-
-The main deliverable is the Jupyter notebook, `Financial-Data-Analytics-Forecasting-Variance-Analysis.ipynb`. It contains code for time-series analysis, comparative forecasting, variance classification, statistical testing, RFM segmentation and customer-focused financial KPIs.
-
-**Evidence boundary:** The repository contains the analysis and model evaluation procedures, but its notebook does not currently provide saved numerical result outputs that can be independently verified from the GitHub files. This README therefore describes methods and implemented code without inventing accuracy scores or business improvements.
-
-## Business Problem and Objectives
-
-Finance and commercial teams often work across disconnected datasets and need to translate raw transactions into decisions. This project addresses four related questions:
-
-1. **Forecasting:** What revenue can be expected from historical transaction patterns?
-2. **Variance analysis:** Where does actual customer spending differ from historical spending benchmarks?
-3. **Customer insights:** Which customer segments exhibit different recency, frequency and monetary patterns?
-4. **Performance reporting:** How can customer lifetime value, churn indicators and revenue concentration inform management reporting?
-
-The objective is an integrated analytical workflow, not a live or production-ready finance platform.
-
-## Data Sources and Integration
-
-The notebook references datasets loaded through a SharePoint/OneDrive integration:
-
-| Source | Main analytical use |
-| --- | --- |
-| Users data | Customer attributes and joins |
-| Cards data | Payment card context |
-| Merchant category codes | Transaction classification |
-| Transaction data | Revenue and spending history |
-| Fraud labels | Supporting transaction risk context |
-
-Actual source data files are **not committed** in this repository. Access requires the appropriate source files and credentials. A template for configuration variables is provided in `.env.example`; never commit real tokens, credentials or personal financial data.
-
-The notebook registers loaded pandas DataFrames in an **in-memory DuckDB connection**, allowing SQL queries without requiring a separate database server.
-
-## Analytical Architecture
-
-```mermaid
-flowchart LR
-  A[Source finance datasets] --> B[Python and SharePoint ingestion]
-  B --> C[pandas DataFrames]
-  C --> D[DuckDB SQL extraction]
-  D --> E[Financial analytical features]
-  E --> F[Revenue forecasting]
-  E --> G[Spending variance analysis]
-  E --> H[Customer segmentation and KPIs]
-  F --> I[Model comparisons and plots]
-  G --> J[Variance classifications and diagnostics]
-  H --> K[RFM segments and customer insights]
-```
-
-## Methodology
-
-### 1. SQL extraction and feature engineering
-
-The notebook contains SQL queries to construct monthly revenue and lag-based forecasting features, budget-versus-actual spending comparisons, customer spending patterns and business intelligence datasets. It includes lag features and three- and six-month rolling averages for revenue modelling.
-
-### 2. Revenue forecasting
-
-The analysis uses time-series stationarity testing with the Augmented Dickey-Fuller test and seasonal decomposition. It includes a **walk-forward comparison of XGBoost, ARIMA(1,1,1) and a naive baseline**, preserving chronological order during evaluation.
-
-The model comparison code calculates:
-
-| Metric | Interpretation |
-| --- | --- |
-| MAE | Average absolute forecast error |
-| RMSE | Error measure that places greater weight on large misses |
-| MAPE | Average percentage forecast error, subject to limitations near zero |
-| R² | Relative fit measure; interpret cautiously on short time series |
-
-The notebook also includes forecast-versus-actual plots and XGBoost feature analysis. A residual-based 95% display band appears in the notebook, but should not be represented as a calibrated probabilistic prediction interval without further testing.
-
-### 3. Variance analysis
-
-The workflow constructs spending variance features, classifies favourable and unfavourable movements, performs a one-sample significance test against zero, identifies major customer contributors and visualises variance through a waterfall-style analysis.
-
-**Important interpretation:** The spending benchmark is derived from historical averages in the notebook. It is not necessarily an approved financial budget. The favourable/unfavourable classification depends on the chosen spending perspective.
-
-### 4. Customer segmentation and KPI analysis
-
-Customer analytics includes Recency, Frequency and Monetary (RFM) scoring, quintile-based customer profiles and K-Means clustering. The notebook explores cluster counts with an elbow chart and creates four customer segment labels.
-
-Further sections address indicative customer lifetime value, churn risk and revenue concentration. These are analytical proxies based on available data and assumptions, rather than externally validated commercial outcomes.
-
-## Outputs and Results Status
-
-| Output | Repository evidence | Verification status |
+| # | Sub-question | Method |
 | --- | --- | --- |
-| SQL feature extraction | Notebook queries | Code present |
-| ARIMA/XGBoost/naive model comparison | Walk-forward validation and metric computation | Numerical results not independently reproduced |
-| Variance diagnostics | Classification, t-test and chart code | Data-dependent results need reproduction |
-| RFM and K-Means segmentation | Scoring, clustering and profile code | Data-dependent results need reproduction |
-| Executive reporting summary | Summary-generation code | Values not independently verified |
+| 1 | Can next month's portfolio **net spend** be forecast more accurately than simple benchmarks? | Walk-forward backtest: naive, seasonal naive, SARIMA, XGBoost (with SHAP) |
+| 2 | Which customers and months **deviate materially** from budget, and is the deviation systematic? | Variance against a trailing three-month budget, tested at customer level (t-test, Wilcoxon) |
+| 3 | How **concentrated** is customer value, and where is labelled **fraud** concentrated? | RFM segments with a K-means cross-check, Pareto analysis, fraud-rate profiling |
 
-The notebook is the authoritative source for the implementation. Do not quote specific forecasting accuracy or business benefit figures without rerunning and retaining the evaluation output.
+The data contains cardholder transactions but no issuer revenue, so the project measures **transaction value (net spend)**, not revenue.
 
-## Repository Structure
+[Explore the full project methodology and documentation](PROJECT_DOCUMENTATION.md).
+
+## Key findings
+
+Based on 13,305,915 transactions from 1,219 customers, January 2010 to October 2019 (118 complete months, $571.8m net spend). All 16 integrity controls pass, and every gold model reconciles to the transactions to the cent.
+
+| Question | Finding |
+| --- | --- |
+| **Forecasting** | Monthly net spend is stable and strongly seasonal, at about $4.4m–$5.1m a month. The best model, **SARIMA, reached 0.70% MAPE** over a 24-month walk-forward backtest, but that is **only 0.4% better than the seasonal-naive benchmark**. For this portfolio, "same month last year" is almost as good as a statistical model. The 12-month outlook carries a ±4% 95% interval. |
+| **Variance** | Against a trailing three-month budget, net variance is **+0.1% of budget**. That is statistically significant (p < 0.001), but only because the sample is so large; economically it is negligible. At customer level the same budget is noisy: **65% of customer-months miss by 10% or more**. |
+| **Value** | Value is moderately concentrated. The **top 10% of customers generate 24%** of net spend, and 60% generate 80%. Champions (43% of customers) account for 64% of spend. 91% of customers transacted on the final day of the data, and only 13 have lapsed. |
+| **Fraud** | Among labelled transactions, **online fraud runs at 0.84% against 0.06% in person (about 14×)**. Transactions flagged with an error carry 0.40% fraud against 0.15% overall. Prepaid debit cards (0.23%) have the highest rate by card type. |
+
+The February dip in spend each year matches its shorter month (28 days against 30–31), not a change in behaviour. Annual spend grew 2–3% a year to 2013 and has been flat since 2016.
+
+These findings come from the executive summary generated in [stage 6](notebook/06-data-visualisation-and-insights/06-data-visualisation-and-insights.ipynb). Read them against the [limitations](#limitations): the data shows the method, not a real bank's portfolio.
+
+## Data analytics lifecycle
+
+| Stage | Notebook | What it does |
+| --- | --- | --- |
+| 1 | [Data Sourcing](notebook/01-data-sourcing/01-data-sourcing.ipynb) | Research question, source schema, OneDrive availability check, source limitations |
+| 2 | [Data Ingestion](notebook/02-data-ingestion/02-data-ingestion.ipynb) | One pull from OneDrive into **bronze** (text-only Parquet) with row-count reconciliation |
+| 3 | [Data Cleaning & Transformation](notebook/03-data-cleaning-and-transformation/03-data-cleaning-and-transformation.ipynb) | Typed **silver** tables, documented cleaning rules, 22 SQL data-quality controls |
+| 4 | [Data Modelling & Analytics](notebook/04-data-modelling-and-analytics/04-data-modelling-and-analytics.ipynb) | **Gold** SQL models, forecasting backtest, variance tests, RFM/K-means, customer KPIs |
+| 5 | [Data Preparation for Reporting](notebook/05-data-preparation-for-reporting/05-data-preparation-for-reporting.ipynb) | Gold-to-silver reconciliation, star-schema CSV extracts and a data dictionary for Power BI |
+| 6 | [Data Visualisation & Insights](notebook/06-data-visualisation-and-insights/06-data-visualisation-and-insights.ipynb) | Charts, an executive summary generated from the data, and limitations |
+
+## Data architecture
 
 ```text
-Financial-Data-Analytics-Forecasting-Variance-Analysis.ipynb
-requirements.txt
-.env.example
-.gitignore
-README.md
-docs/
-    legacy-readme.md
+OneDrive  TeslimDataLakes/financial_transactions_dataset_analytics_kaggle/   (5 source files)
+   │  onedrive_loader.load()  (Microsoft Graph API, read-only)
+   ▼
+data/bronze/*.parquet   text-only copy of the source            python/ingestion.py
+   ▼
+data/silver/*.parquet   typed, cleaned, conformed keys           python/cleaning.py + sql/quality/
+   ▼
+data/gold/*.parquet     analytical models and model outputs      sql/gold/*.sql + python/forecasting.py, segmentation.py
+   ▼
+outputs/powerbi/*.csv   reconciled reporting extracts            stage 5 notebook
 ```
 
-## Setup and Reproducibility
+DuckDB queries the Parquet files directly through `silver_*` and `gold_*` views ([`python/warehouse.py`](python/warehouse.py)), so the 13-million-row transaction table never has to fit in pandas for the SQL steps. `data/` and `outputs/` are gitignored and can be rebuilt from OneDrive by running stages 2–6.
 
-1. Clone the repository and create a Python virtual environment.
-2. Install the packages listed in `requirements.txt`.
-3. Copy `.env.example` to `.env` and configure a valid, authorised SharePoint/OneDrive connection.
-4. Provide the required datasets and check access permissions.
-5. Open the notebook and run its cells in order after confirming the data schema.
+## Methodological corrections
+
+This repository replaces an earlier single notebook, which is kept in [`archive/`](archive/). These corrections change the results, not just how the project is laid out:
+
+1. **Forecast leakage.** The old rolling-average and cumulative features included the month being predicted. All features now use prior months only.
+2. **Circular variance.** The old "budget" was the same month's average, so variances summed to zero by construction. The budget now comes only from earlier months.
+3. **Double counting.** The old segmentation query repeated each customer's totals once per active month.
+4. **Broken joins and dates.** Fraud labels and MCC descriptions were never reshaped, so their joins couldn't resolve, and card open dates were parsed into NaT.
+5. **Over-stated scope.** The old notebook described the data as revenue and claimed LSTM, DBSCAN and Power BI work it didn't contain.
+
+## Reproducing the analysis
 
 ```bash
-git clone https://github.com/TeslimAdeyanju/Financial-Forecasting-Variance-Analysis.git
-cd Financial-Forecasting-Variance-Analysis
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install -r requirements.txt
-cp .env.example .env
-jupyter notebook Financial-Data-Analytics-Forecasting-Variance-Analysis.ipynb
+uv venv .venv --python 3.13
+uv pip install --python .venv/bin/python -r requirements.txt
+uv pip install --python .venv/bin/python -e /Users/teslim/TeslimWorkSpace/OneDrive-Connector
+
+# run the six stages in order (stage 2 is the only one that contacts OneDrive)
+for s in notebook/0*/; do
+  n=$(basename "$s"); .venv/bin/jupyter nbconvert --to notebook --execute --inplace "$s$n.ipynb"
+done
 ```
 
-The instructions above are a starting point, **not a verified one-command execution**. Some notebook sections read intermediate CSVs such as `spending_variance_analysis_data.csv` and `business_intelligence_data.csv` from the working directory even though earlier sections save analysis tables through SharePoint. These paths and data exchange steps require reconciliation. The SharePoint authentication path also depends on tenant and app registration configuration.
+OneDrive access needs the [OneDrive-Connector](https://github.com/UthmanAdeyanju/OneDrive-Connector) `.env` (Azure app client ID, tenant ID and secret). **Source:** [Financial Transactions Dataset: Analytics (Kaggle)](https://www.kaggle.com/datasets/computingvictor/transactions-fraud-datasets).
 
-## Limitations and Next Steps
+## Limitations
 
-- Document the licensed or permitted data source and provide a non-sensitive sample dataset or synthetic test fixture.
-- Make source and intermediate file locations configurable and reproducible.
-- Separate extraction, feature engineering, forecasting and reporting into testable modules.
-- Validate forecasting against a sufficiently long, appropriate temporal holdout and capture numerical evaluation outputs.
-- Check for feature leakage and ensure each forecast's predictors are known at prediction time.
-- Validate benchmark definitions for variance analysis and any statistical testing assumptions.
-- Test cluster stability and the business meaning of customer segment labels.
-- Add reproducible dashboards or screenshots generated from the analysis.
-- Avoid committing credentials or private customer information.
-
-## Skills Demonstrated
-
-Financial analysis, SQL extraction, data transformation, time-series modelling, regression evaluation, variance investigation, customer segmentation, model interpretability and executive reporting.
+The publisher doesn't document how the records were produced, so the findings show the method rather than describe a real bank. Fraud labels cover only part of the transactions. The variance "budget" is a statistical expectation, not an approved plan. See [stage 6](notebook/06-data-visualisation-and-insights/06-data-visualisation-and-insights.ipynb#6.5-Limitations) for the full list.
 
 ## Author
 
-**Teslim Adeyanju**  
-[GitHub](https://github.com/TeslimAdeyanju) | [Portfolio](https://adeyanjuteslim.co.uk) | [LinkedIn](https://www.linkedin.com/in/adeyanjuteslimuthman)
+**Teslim Adeyanju** | [Portfolio](https://adeyanjuteslim.co.uk) | [LinkedIn](https://www.linkedin.com/in/adeyanjuteslimuthman)
 
-[Original README archive](docs/legacy-readme.md)
+[Previous README (October 2026)](docs/readme-history.md) | [Original README](docs/legacy-readme.md)

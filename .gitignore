@@ -156,3 +156,6 @@ cython_debug/
 
 
 # End of https://mrkandreev.name/snippets/gitignore-generator/#Python,time,series,machine
+# P22 local medallion cache and reporting extracts (rebuilt from OneDrive by the stage notebooks)
+data/
+outputs/
