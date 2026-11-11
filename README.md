@@ -50,8 +50,6 @@ The diagram follows the data from the OneDrive source through the bronze, silver
 
 ![Data architecture: OneDrive source read through the Microsoft Graph API into bronze, silver and gold Parquet layers, then reconciled CSV extracts for Power BI](docs/images/financial_transactions_data_architecture.png)
 
-The file names in the source panel are illustrative. The five actual sources are `transactions_data.csv`, `users_data.csv`, `cards_data.csv`, `mcc_codes.json` and `train_fraud_labels.json`. The gold layer forecasts monthly **net spend** and segments **customers**. The Power BI extracts are published, but the dashboard has not been built yet.
-
 DuckDB queries the Parquet files directly through `silver_*` and `gold_*` views ([`python/warehouse.py`](python/warehouse.py)), so the 13-million-row transaction table never has to fit in pandas for the SQL steps. `data/` and `outputs/` are gitignored and can be rebuilt from OneDrive by running stages 2–6.
 
 ## Methodological corrections
