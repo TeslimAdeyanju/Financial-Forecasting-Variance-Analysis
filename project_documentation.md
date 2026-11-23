@@ -163,7 +163,7 @@ The stage lists the OneDrive folder and stops with a clear error if any required
 
 **Output:** A documented, available source.
 
-**Technical notebook:** [Stage 1: Data Sourcing](notebook/01-data-sourcing/01-data-sourcing.ipynb)
+**Technical notebook:** [Stage 1: Data Sourcing](notebook/01_data_sourcing/01_data_sourcing.ipynb)
 
 ---
 
@@ -177,7 +177,7 @@ Row counts are reconciled against the figures published with the source. The rou
 
 **Output:** Five bronze Parquet files and a load log with row reconciliation.
 
-**Technical notebook:** [Stage 2: Data Ingestion](notebook/02-data-ingestion/02-data-ingestion.ipynb)
+**Technical notebook:** [Stage 2: Data Ingestion](notebook/02_data_ingestion/02_data_ingestion.ipynb)
 
 ---
 
@@ -206,7 +206,7 @@ The stage also identifies incomplete edge months, which are excluded from the ti
 
 **Output:** Five silver tables and a saved data-quality report.
 
-**Technical notebook:** [Stage 3: Data Cleaning & Transformation](notebook/03-data-cleaning-and-transformation/03-data-cleaning-and-transformation.ipynb)
+**Technical notebook:** [Stage 3: Data Cleaning & Transformation](notebook/03_data_cleaning_and_transformation/03_data_cleaning_and_transformation.ipynb)
 
 ---
 
@@ -242,7 +242,7 @@ The stage also identifies incomplete edge months, which are excluded from the ti
 
 **Output:** Gold tables for every model and result.
 
-**Technical notebook:** [Stage 4: Data Modelling & Analytics](notebook/04-data-modelling-and-analytics/04-data-modelling-and-analytics.ipynb)
+**Technical notebook:** [Stage 4: Data Modelling & Analytics](notebook/04_data_modelling_and_analytics/04_data_modelling_and_analytics.ipynb)
 
 ---
 
@@ -261,7 +261,7 @@ A column-level data dictionary is published with them.
 
 **Output:** `outputs/powerbi/*.csv` and `data_dictionary.csv`.
 
-**Technical notebook:** [Stage 5: Data Preparation for Reporting](notebook/05-data-preparation-for-reporting/05-data-preparation-for-reporting.ipynb)
+**Technical notebook:** [Stage 5: Data Preparation for Reporting](notebook/05_data_preparation_for_reporting/05_data_preparation_for_reporting.ipynb)
 
 ---
 
@@ -282,7 +282,7 @@ The **executive summary is generated with code from the gold tables**. Each sent
 
 **Output:** Charts, the executive summary and the limitations.
 
-**Technical notebook:** [Stage 6: Data Visualisation & Insights](notebook/06-data-visualisation-and-insights/06-data-visualisation-and-insights.ipynb)
+**Technical notebook:** [Stage 6: Data Visualisation & Insights](notebook/06_data_visualisation_and_insights/06_data_visualisation_and_insights.ipynb)
 
 ---
 

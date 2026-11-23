@@ -14,7 +14,7 @@ This project looks at whether a card portfolio's monthly spending can be forecas
 
 The data contains cardholder transactions but no issuer revenue, so the project measures **transaction value (net spend)**, not revenue.
 
-[Explore the full project methodology and documentation](PROJECT_DOCUMENTATION.md).
+[Explore the full project methodology and documentation](project_documentation.md).
 
 ## Key findings
 
@@ -29,18 +29,18 @@ Based on 13,305,915 transactions from 1,219 customers, January 2010 to October 2
 
 The February dip in spend each year matches its shorter month (28 days against 30–31), not a change in behaviour. Annual spend grew 2–3% a year to 2013 and has been flat since 2016.
 
-These findings come from the executive summary generated in [stage 6](notebook/06-data-visualisation-and-insights/06-data-visualisation-and-insights.ipynb). Read them against the [limitations](#limitations): the data shows the method, not a real bank's portfolio.
+These findings come from the executive summary generated in [stage 6](notebook/06_data_visualisation_and_insights/06_data_visualisation_and_insights.ipynb). Read them against the [limitations](#limitations): the data shows the method, not a real bank's portfolio.
 
 ## Data analytics lifecycle
 
 | Stage | Notebook | What it does |
 | --- | --- | --- |
-| 1 | [Data Sourcing](notebook/01-data-sourcing/01-data-sourcing.ipynb) | Research question, source schema, OneDrive availability check, source limitations |
-| 2 | [Data Ingestion](notebook/02-data-ingestion/02-data-ingestion.ipynb) | One pull from OneDrive into **bronze** (text-only Parquet) with row-count reconciliation |
-| 3 | [Data Cleaning & Transformation](notebook/03-data-cleaning-and-transformation/03-data-cleaning-and-transformation.ipynb) | Typed **silver** tables, documented cleaning rules, 22 SQL data-quality controls |
-| 4 | [Data Modelling & Analytics](notebook/04-data-modelling-and-analytics/04-data-modelling-and-analytics.ipynb) | **Gold** SQL models, forecasting backtest, variance tests, RFM/K-means, customer KPIs |
-| 5 | [Data Preparation for Reporting](notebook/05-data-preparation-for-reporting/05-data-preparation-for-reporting.ipynb) | Gold-to-silver reconciliation, star-schema CSV extracts and a data dictionary for Power BI |
-| 6 | [Data Visualisation & Insights](notebook/06-data-visualisation-and-insights/06-data-visualisation-and-insights.ipynb) | Charts, an executive summary generated from the data, and limitations |
+| 1 | [Data Sourcing](notebook/01_data_sourcing/01_data_sourcing.ipynb) | Research question, source schema, OneDrive availability check, source limitations |
+| 2 | [Data Ingestion](notebook/02_data_ingestion/02_data_ingestion.ipynb) | One pull from OneDrive into **bronze** (text-only Parquet) with row-count reconciliation |
+| 3 | [Data Cleaning & Transformation](notebook/03_data_cleaning_and_transformation/03_data_cleaning_and_transformation.ipynb) | Typed **silver** tables, documented cleaning rules, 22 SQL data-quality controls |
+| 4 | [Data Modelling & Analytics](notebook/04_data_modelling_and_analytics/04_data_modelling_and_analytics.ipynb) | **Gold** SQL models, forecasting backtest, variance tests, RFM/K-means, customer KPIs |
+| 5 | [Data Preparation for Reporting](notebook/05_data_preparation_for_reporting/05_data_preparation_for_reporting.ipynb) | Gold-to-silver reconciliation, star-schema CSV extracts and a data dictionary for Power BI |
+| 6 | [Data Visualisation & Insights](notebook/06_data_visualisation_and_insights/06_data_visualisation_and_insights.ipynb) | Charts, an executive summary generated from the data, and limitations |
 
 ## Data architecture
 
@@ -75,10 +75,10 @@ OneDrive access needs the [OneDrive-Connector](https://github.com/UthmanAdeyanju
 
 ## Limitations
 
-The publisher doesn't document how the records were produced, so the findings show the method rather than describe a real bank. Fraud labels cover only part of the transactions. The variance "budget" is a statistical expectation, not an approved plan. See [stage 6](notebook/06-data-visualisation-and-insights/06-data-visualisation-and-insights.ipynb#6.5-Limitations) for the full list.
+The publisher doesn't document how the records were produced, so the findings show the method rather than describe a real bank. Fraud labels cover only part of the transactions. The variance "budget" is a statistical expectation, not an approved plan. See [stage 6](notebook/06_data_visualisation_and_insights/06_data_visualisation_and_insights.ipynb#6.5-Limitations) for the full list.
 
 ## Author
 
 **Teslim Adeyanju** | [Portfolio](https://adeyanjuteslim.co.uk) | [LinkedIn](https://www.linkedin.com/in/adeyanjuteslimuthman)
 
-[Previous README (October 2026)](docs/readme-history.md) | [Original README](docs/legacy-readme.md)
+[Previous README (October 2026)](docs/readme_history.md) | [Original README](docs/legacy_readme.md)

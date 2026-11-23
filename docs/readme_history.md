@@ -112,7 +112,7 @@ requirements.txt
 .gitignore
 README.md
 docs/
-    legacy-readme.md
+    legacy_readme.md
 ```
 
 ## Setup and Reproducibility
@@ -156,4 +156,4 @@ Financial analysis, SQL extraction, data transformation, time-series modelling, 
 **Teslim Adeyanju**  
 [GitHub](https://github.com/TeslimAdeyanju) | [Portfolio](https://adeyanjuteslim.co.uk) | [LinkedIn](https://www.linkedin.com/in/adeyanjuteslimuthman)
 
-[Original README archive](legacy-readme.md)
+[Original README archive](legacy_readme.md)

@@ -13,7 +13,7 @@ uv pip install --python .venv/bin/python -r requirements.txt
 uv pip install --python .venv/bin/python -e /Users/teslim/TeslimWorkSpace/OneDrive-Connector   # data access
 
 # run one stage headless (stages must run in order the first time: each reads what the previous wrote)
-.venv/bin/jupyter nbconvert --to notebook --execute --inplace notebook/04-data-modelling-and-analytics/04-data-modelling-and-analytics.ipynb
+.venv/bin/jupyter nbconvert --to notebook --execute --inplace notebook/04_data_modelling_and_analytics/04_data_modelling_and_analytics.ipynb
 ```
 
 There is no test suite or linter. To test without OneDrive, point `P22_DATA_DIR` and `P22_OUTPUT_DIR` at a scratch folder that holds a `bronze/` set of Parquet files, then execute stages 3–6 with nbconvert. Every stage notebook finds the repo root by walking up to `python/config.py`, so they run from any working directory.
